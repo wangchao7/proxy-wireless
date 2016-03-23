@@ -1,0 +1,11 @@
+#!/bin/sh
+#!stop wvdial
+pkill wvdial
+# If the ppp0 pid file is present then the program is running. Stop it
+if [ -r /var/run/ppp0.pid ]; then
+kill -INT `cat /var/run/ppp0.pid`
+echo "PPP link to ppp0 terminated."
+fi
+# This script initiates the ppp connections by wvdial
+wvdial tom &
+echo "OK"
